@@ -1,16 +1,17 @@
 import { React, useState } from 'react';
-import { View, TextInput, Text } from 'react-native';
-let department = require('./data/departments.json');
+import { View, TextInput, Text, Button } from 'react-native';
+import department from '../data/departments.json'
 
 
-const employeeDetails = ( employee ) => {
+
+const EmployeeDetails = ( {employee} ) => {
   const [isEditing, setIsEditing] = useState(false)
-  const employeeName = employee.name.split(" ")
+  const [employeeFullName, setEmployeeFullName] = useState(employee.name.split(' '))
   const employeeID = employee.id
-  const [employeeFirstName, setEmployeeFirstName ] = useState(employeeName[0])
-  const [employeeLastName, setEmployeeLastName ] = useState(employeeName[1])
+  const [employeeFirstName, setEmployeeFirstName ] = useState(employeeFullName[0])
+  const [employeeLastName, setEmployeeLastName ] = useState(employeeFullName[1])
   const [employeePhone, setEmployeePhone ] = useState(employee.phone)
-  const [employeeDepartment, setEmployeeDepartment ] = useState(employee.department)
+  const [employeeDepartment, setEmployeeDepartment ] = useState(department[employee.department].name)
   const [employeeStreet, setEmployeeStreet ] = useState(employee.addressStreet)
   const [employeeCity, setEmployeeCity ] = useState(employee.addressCity)
   const [employeeState, setEmployeeState ] = useState(employee.addressState)
@@ -23,9 +24,9 @@ const employeeDetails = ( employee ) => {
 
   return (
     <View>
-      <View>
+      <View >
         <Button title="Back"/>
-        <Button title={isEditing ? "Save" : "Edit"} onPress={setIsEditing(!isEditing)} /> 
+        <Button title={isEditing ? "Save" : "Edit"} onPress={() => setIsEditing(!isEditing)} />
       </View>
       <Text>First Name:</Text>
       <TextInput 
@@ -84,3 +85,5 @@ const employeeDetails = ( employee ) => {
     </View>
   )
 }
+
+export default EmployeeDetails
