@@ -1,22 +1,24 @@
 import { React, useState } from 'react';
 import { View, TextInput, Text, Button } from 'react-native';
 import department from '../data/departments.json'
+import EMPLOYEES from '../data/employees.json'
 
 
-
-const EmployeeDetails = ( {employee} ) => {
+const EmployeeDetails = ( { route } ) => {
   const [isEditing, setIsEditing] = useState(false)
-  const [employeeFullName, setEmployeeFullName] = useState(employee.name.split(' '))
-  const employeeID = employee.id
-  const [employeeFirstName, setEmployeeFirstName ] = useState(employeeFullName[0])
-  const [employeeLastName, setEmployeeLastName ] = useState(employeeFullName[1])
-  const [employeePhone, setEmployeePhone ] = useState(employee.phone)
-  const [employeeDepartment, setEmployeeDepartment ] = useState(department[employee.department].name)
-  const [employeeStreet, setEmployeeStreet ] = useState(employee.addressStreet)
-  const [employeeCity, setEmployeeCity ] = useState(employee.addressCity)
-  const [employeeState, setEmployeeState ] = useState(employee.addressState)
-  const [employeePostCode, setEmployeePostCode ] = useState(employee.addressPostCode)
-  const [employeeCountry, setEmployeeCountry ] = useState(employee.addressCountry)
+  const key = route.key
+  const employee = EMPLOYEES[key]
+  const [employeeFullName, setEmployeeFullName] = useState(employee ? employee.name.split(' ') : '')
+  const employeeID = employee ? employee.id : ''
+  const [employeeFirstName, setEmployeeFirstName ] = useState(employee ? employeeFullName[0] : '')
+  const [employeeLastName, setEmployeeLastName ] = useState(employee ? employeeFullName[1] : '')
+  const [employeePhone, setEmployeePhone ] = useState(employee ? employee.phone : '')
+  const [employeeDepartment, setEmployeeDepartment ] = useState(employee ? department[employee.department].name : '')
+  const [employeeStreet, setEmployeeStreet ] = useState(employee ? employee.addressStreet : '')
+  const [employeeCity, setEmployeeCity ] = useState(employee ? employee.addressCity : '')
+  const [employeeState, setEmployeeState ] = useState(employee ? employee.addressState : '')
+  const [employeePostCode, setEmployeePostCode ] = useState(employee ? employee.addressPostCode : '')
+  const [employeeCountry, setEmployeeCountry ] = useState(employee ? employee.addressCountry : '')
   const saveFunction = () => {
     //save function here
     //implement to button below
@@ -24,10 +26,9 @@ const EmployeeDetails = ( {employee} ) => {
 
   return (
     <View>
-      <View >
-        <Button title="Back"/>
-        <Button title={isEditing ? "Save" : "Edit"} onPress={() => setIsEditing(!isEditing)} />
-      </View>
+     
+      <Button title={isEditing ? "Save" : "Edit"} onPress={() => setIsEditing(!isEditing)} />
+      <View>
       <Text>First Name:</Text>
       <TextInput 
       value={employeeFirstName}
@@ -82,6 +83,7 @@ const EmployeeDetails = ( {employee} ) => {
       onChangeText={setEmployeeCountry}
       editable={isEditing}
       />
+      </View>
     </View>
   )
 }
