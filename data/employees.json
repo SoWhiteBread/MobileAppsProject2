@@ -21,7 +21,7 @@
     "addressPostCode": "1101",
     "addressCountry": "Australia"
   },
-  "2": {
+  "2" : {
     "id": 3,
     "name": "Bob O'Bits",
     "phone": "05 7788 2255",
@@ -43,7 +43,7 @@
     "addressPostCode": "1010",
     "addressCountry": "Australia"
   },
-  "4": {
+  "4" :{
     "id": 5,
     "name": "Mick Green",
     "phone": "02 9988 1122",
